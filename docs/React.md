@@ -99,3 +99,73 @@ const Component = () => {
 기존 html에서 `onclick`과 같이 모두 소문자로 작성하던 것과는 다르게 `onClick`과 같이 대소문자를 구분해주어야합니다.
 
 이벤트 전달을 활용하여 앞서 배웠던 state를 조작하고 다채로운 앱을 구성할 수 있습니다.
+
+## 조건부 렌더링
+
+js에 존재하는 boolean 값의 true, false에 따라 렌더링 대상을 변경시킬 수 있습니다.
+
+```jsx
+
+const Component = (prop) => {
+  const { value } = prop;
+
+  return (<>
+    {value ? <div>안녕하세요</div> : <span>안녕히가세요</span>}
+    </>)
+};
+
+const Component2 = (prop) => {
+  const { value } = prop;
+
+  if (value) {
+    return <div>안녕하세요</div>
+  }
+  return <span>안녕히가세요</div>
+}
+```
+
+boolean값을 통해서 분기문을 설정할 수 있다면 어떤 형식으로든 표현할 수 있습니다.
+
+렌더링할 대상을 결정할 수도 있고, props로 전달할 값을 결정할 수도 있습니다.
+
+```jsx
+const Component = (prop) => {
+  const { value } = prop;
+
+  return <div style={{
+    color: value ? "black" : "red",
+  }}>false면 빨간색</div>
+}
+```
+
+## 반복 렌더링
+
+반복되는 대상에 대해 하나하나 직접 컴포넌트를 작성하는 것이 아닌, 한번의 코드로 반복되는 대상을 간편하게 렌더링할 수 있습니다.
+
+```jsx
+const Compnent = () => {
+  return (
+    <ul>
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+      <li>4</li>
+      <li>5</li>
+    </ul>
+  )  
+}
+
+// 아래와 같이 편하게!
+
+const arr = [1,2,3,4,5];
+
+const LoopCompnent = () => {
+  return (
+    <ul>{arr.map(v => <li key={v}>v</li>)}</ul>
+  )  
+}
+```
+
+반복 렌더링을 사용하기 위해서는 각 요소에 요소별로 고유한 key 값을 입력해주어야합니다.
+
+입력하지 않더라도 코드는 실행되지만, 고유한 값을 입력했을 때 React 에서 자동적으로 렌더링을 최적화해 컴포넌트가 리렌더링될 때 변경된 대상만 다시 렌더링할 수 있도록 해줍니다.
