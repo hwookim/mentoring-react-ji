@@ -2,3 +2,9 @@
   margin-top: -10px;
   margin-left: -10px;
 }
+
+.menuItem {
+  :global(.Mui-selected) {
+    background-color: black;
+  }
+}
